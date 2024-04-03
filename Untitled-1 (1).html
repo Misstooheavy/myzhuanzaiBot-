@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram 机器人</title>
+    <style>
+        /* 添加样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-window {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-top: 10px;
+        }
+        .input-group input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        .input-group button {
+            width: 60px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎使用 Telegram 机器人</h1>
+        <div class="chat-window" id="chat-window">
+            <!-- 聊天消息显示区域 -->
+        </div>
+        <div class="input-group">
+            <input type="text" id="message-input" placeholder="输入消息...">
+            <button id="send-button">发送</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript代码，用于实现机器人的交互功能
+        const chatWindow = document.getElementById('chat-window');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        // 发送消息
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() !== '') {
+                // 在聊天窗口中显示消息
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                chatWindow.appendChild(messageElement);
+                
+                // 清空输入框
+                messageInput.value = '';
+                
+                // 模拟机器人回复
+                setTimeout(() => {
+                    const replyMessage = '这是机器人的回复：' + message;
+                    const replyElement = document.createElement('div');
+                    replyElement.textContent = replyMessage;
+                    chatWindow.appendChild(replyElement);
+                    // 滚动到底部
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // 监听发送按钮点击事件
+        sendButton.addEventListener('click', sendMessage);
+
+        // 监听输入框回车键按下事件
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
